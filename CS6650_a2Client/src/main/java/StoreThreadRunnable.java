@@ -61,6 +61,7 @@ public class StoreThreadRunnable implements Runnable {
 
     this.shop = new ApiClient();
     shop.setBasePath(shopPath);
+    shop.setConnectTimeout(1000000);
     apiInstance = new PurchaseApi(shop);
   }
 

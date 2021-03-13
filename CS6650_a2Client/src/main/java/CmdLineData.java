@@ -16,14 +16,14 @@ public class CmdLineData {
     this.commandLineData.put("maxStores", 10);
     this.commandLineData.put("customersPerStore", 1000);
     this.commandLineData.put("maxItemId",100000);
-    this.commandLineData.put("numPurchases", 60);
+    this.commandLineData.put("numPurchases", 300);
     this.commandLineData.put("itemsPerPurchase", 5);
     this.commandLineData.put("date", 20210101);
     this.commandLineData.put("portNumber", 8080);
     this.ipAddress = "localhost";
     this.serverPath = "http://"+ this.ipAddress + ":" +
         String.valueOf(this.commandLineData.get("portNumber")) +
-        "/CS6650_a1Servlet_war";
+        "/CS6650_a2Servlet_war";
   }
 
   public HashMap<String, Integer> getCommandLineData() {
@@ -51,7 +51,7 @@ public class CmdLineData {
    */
   public void setServerPath(String ipAddress) {
     this.serverPath = "http://" + ipAddress + ":" +
-        String.valueOf(this.commandLineData.get("portNumber")) + "/CS6650_a1Servlet_war";
+        String.valueOf(this.commandLineData.get("portNumber")) + "/CS6650_a2Servlet_war";
   }
 
   /**

@@ -40,4 +40,12 @@ public class PurchaseItem implements Serializable {
   public void setNumberOfItems(int numberOfItems) {
     this.numberOfItems = numberOfItems;
   }
+
+  @Override
+  public String toString() {
+    return "PurchaseItem{" +
+        "itemID='" + itemID + '\'' +
+        ", numberOfItems=" + numberOfItems +
+        '}';
+  }
 }
