@@ -1,10 +1,10 @@
 import com.rabbitmq.client.Channel;
-import com.rabbitmq.client.ConnectionFactory;
 import com.rabbitmq.client.Connection;
+import com.rabbitmq.client.ConnectionFactory;
 import java.io.FileInputStream;
 import java.util.Properties;
 
-public class Receiver {
+public class Receiver2 {
   private static final int NUM_THREADS = 10;
   private static final String EXCHANGE_NAME = "supermarket";
   private static final String EXCHANGE_TYPE = "fanout";
@@ -24,8 +24,10 @@ public class Receiver {
 
     Thread[] threads = new Thread[NUM_THREADS];
 
+    Store store = Store.getInstance();
+
     for (int i = 0; i < NUM_THREADS; i++) {
-      threads[i] = new Thread(new ReceiverRunnable(connection, purchasesQueue));
+      threads[i] = new Thread(new Receiver2Runnable(connection, purchasesQueue));
       threads[i].start();
     }
 

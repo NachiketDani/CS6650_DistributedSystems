@@ -6,7 +6,8 @@ public class PurchaseDao {
   public boolean createPurchase(PurchaseModel newPurchase) {
     Connection conn = null;
     PreparedStatement preparedStatement = null;
-    String insertQueryStatement = "INSERT INTO Purchases (storeID, customerID, purchaseDate, items) VALUES (?,?,?,?)";
+    String insertQueryStatement = "INSERT INTO Purchases (storeID, customerID, purchaseDate, items)"
+        + " VALUES (?,?,?,?)";
 
     try {
       conn = DBConnector.getConnection();
@@ -15,7 +16,7 @@ public class PurchaseDao {
       preparedStatement.setInt(2, newPurchase.getCustomerID());
       preparedStatement.setString(3, newPurchase.getDate());
       preparedStatement.setString(4, newPurchase.getPurchase());
-
+      System.out.println("PurchaseDao line19");
       // execute insert SQL statement
       preparedStatement.executeUpdate();
     } catch (SQLException e) {

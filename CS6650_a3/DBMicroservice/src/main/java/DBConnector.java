@@ -8,7 +8,7 @@ public class DBConnector {
   private static HikariDataSource dataSource;
   private static final String HOST_NAME = System.getProperty("MYSQL_ADDRESS");
   private static final String PORT = System.getProperty("MySQL_PORT");
-  private static final String DATABASE = "purchasesdb";
+  private static final String DATABASE = System.getProperty("DATABASE");
   private static final String USERNAME = System.getProperty("DB_USERNAME");
   private static final String PASSWORD = System.getProperty("DB_PASSWORD");
 
