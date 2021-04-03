@@ -4,6 +4,10 @@ import com.rabbitmq.client.ConnectionFactory;
 import java.io.FileInputStream;
 import java.util.Properties;
 
+/**
+ * Receiver2 class
+ * Microservice that caters to storing purchase data into the Store
+ */
 public class Receiver2 {
   private static final int NUM_THREADS = 10;
   private static final String EXCHANGE_NAME = "supermarket";

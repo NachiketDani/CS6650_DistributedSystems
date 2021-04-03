@@ -13,6 +13,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * Post Purchases Servlet
+ */
 @WebServlet(name = "PurchaseServlet", value = "/PurchaseServlet")
 public class PurchaseServlet extends HttpServlet {
   final private int STOREID_INDEX = 1;
@@ -23,6 +26,10 @@ public class PurchaseServlet extends HttpServlet {
   private static final String EXCHANGE_NAME = "supermarket";
   private Channel channel;
 
+  /**
+   * Init method for Servlet
+   * @throws ServletException Exception if channel cannot be instantiated
+   */
   @Override
   public void init() throws ServletException {
     try {
@@ -33,6 +40,13 @@ public class PurchaseServlet extends HttpServlet {
     }
   }
 
+  /**
+   * Post Purchase Servlet method
+   * @param request HTTP Incoming Request object
+   * @param response HTTP Response object
+   * @throws ServletException Servlet exception
+   * @throws IOException
+   */
   @Override
   protected void doPost(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
@@ -70,6 +84,13 @@ public class PurchaseServlet extends HttpServlet {
       response.getWriter().write("Invalid purchase");
     }
   }
+
+  /**
+   * Make Purchase helper method
+   * @param urlParts URL flags
+   * @param purchase purchase string body
+   * @throws IOException I/O exception
+   */
   private void makePurchase(String[] urlParts, String purchase)
       throws IOException {
     int storeId = Integer.parseInt((urlParts[STOREID_INDEX]));
@@ -86,6 +107,12 @@ public class PurchaseServlet extends HttpServlet {
         purchaseString.getBytes("UTF-8"));
   }
 
+  /**
+   * Parse request body helper method
+   * @param requestBodyReader HTTP request body
+   * @return toString representation of request body
+   * @throws IOException I/O exception
+   */
   private String parseRequestBody(BufferedReader requestBodyReader) throws IOException {
     // read in request body
     StringBuilder requestBodyBuilder = new StringBuilder();
@@ -96,6 +123,11 @@ public class PurchaseServlet extends HttpServlet {
     return requestBodyBuilder.toString();
   }
 
+  /**
+   * Validate purchase data helper method
+   * @param purchase PurchaseModel object
+   * @return boolean if purchase data is valid or not
+   */
   private boolean validatePurchase(Purchase purchase) {
     for (PurchaseItem item : purchase.getItems()) {
       if (item.getItemID() == null || item.getItemID().isEmpty()
@@ -106,7 +138,11 @@ public class PurchaseServlet extends HttpServlet {
     return true;
   }
 
-
+  /**
+   * Verify Date helper method
+   * @param dateString String date object
+   * @return boolean if date data is valid or not
+   */
   private boolean verifyDate(String dateString) {
     // verify date
     try {
@@ -117,6 +153,11 @@ public class PurchaseServlet extends HttpServlet {
     return true;
   }
 
+  /**
+   * Verify CustomerId helper method
+   * @param customerIdString CustomerId
+   * @return boolean whether customer id is valid
+   */
   private boolean verifyCustomerId(String customerIdString) {
     try {
       int customerId = Integer.parseInt(customerIdString);
@@ -129,6 +170,11 @@ public class PurchaseServlet extends HttpServlet {
     return true;
   }
 
+  /**
+   * Verify store id helper method
+   * @param storeIdString store id string
+   * @return boolean if store id is valid
+   */
   private boolean verifyStoreId(String storeIdString) {
     try {
       int storeId = Integer.parseInt(storeIdString);
@@ -141,6 +187,11 @@ public class PurchaseServlet extends HttpServlet {
     return true;
   }
 
+  /**
+   * URL validation helper method
+   * @param urlParts Parts of the URL
+   * @return boolean based on if URL is valid
+   */
   private boolean isUrlValid(String[] urlParts) {
     // urlPath  = "/purchase/store_id/customer/customer_id/date/YYYYMMDD"
     // urlParts = [ , 22, customer, 11, date, 20210101]
@@ -153,5 +204,13 @@ public class PurchaseServlet extends HttpServlet {
     return verifyDate(urlParts[DATE_VAL_INDEX])
         && verifyCustomerId(urlParts[CUSTOMERID_INDEX])
         && verifyStoreId(urlParts[STOREID_INDEX]);
+  }
+
+  /**
+   * Destroy method for active channel to return channel to pool
+   */
+  @Override
+  public void destroy() {
+    ChannelPool.getChannelPoolInstance().returnObject(channel);
   }
 }
