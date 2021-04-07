@@ -10,28 +10,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3474376c-6275-4b7d-9f33-1c7332153948" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../DBMicroservice/src/main/java/PurchaseModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/../DBMicroservice/src/main/java/PurchaseModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../PurchaseStore/src/main/java/Purchase.java" beforeDir="false" afterPath="$PROJECT_DIR$/../PurchaseStore/src/main/java/Purchase.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../PurchaseStore/src/main/java/PurchaseItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/../PurchaseStore/src/main/java/PurchaseItem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../PurchaseStore/src/main/java/PurchaseModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/../PurchaseStore/src/main/java/PurchaseModel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../PurchaseStore/src/main/java/Receiver2.java" beforeDir="false" afterPath="$PROJECT_DIR$/../PurchaseStore/src/main/java/Receiver2.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../PurchaseStore/src/main/java/Receiver2Runnable.java" beforeDir="false" afterPath="$PROJECT_DIR$/../PurchaseStore/src/main/java/Receiver2Runnable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PurchaseStore/src/main/java/Receiver2Runnable.java" beforeDir="false" afterPath="$PROJECT_DIR$/../PurchaseStore/src/main/java/ReceiverStoreRunnable.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../PurchaseStore/src/main/java/Store.java" beforeDir="false" afterPath="$PROJECT_DIR$/../PurchaseStore/src/main/java/Store.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ChannelPool.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ChannelPool.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/PooledChannelFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/PooledChannelFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Purchase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Purchase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/Servlet_war_exploded/WEB-INF/classes/ChannelPool.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Servlet_war_exploded/WEB-INF/classes/ChannelPool.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/Servlet_war_exploded/WEB-INF/classes/PooledChannelFactory.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Servlet_war_exploded/WEB-INF/classes/PooledChannelFactory.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/Servlet_war_exploded/WEB-INF/classes/Purchase.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Servlet_war_exploded/WEB-INF/classes/Purchase.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/Servlet_war_exploded/WEB-INF/classes/PurchaseItem.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Servlet_war_exploded/WEB-INF/classes/PurchaseItem.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/Servlet_war_exploded/WEB-INF/classes/PurchaseModel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Servlet_war_exploded/WEB-INF/classes/PurchaseModel.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/Servlet_war_exploded/WEB-INF/classes/PurchaseServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Servlet_war_exploded/WEB-INF/classes/PurchaseServlet.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/Servlet_war_exploded/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Servlet_war_exploded/WEB-INF/web.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/PurchaseItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/PurchaseItem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/PurchaseModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/PurchaseModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/PurchaseServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/PurchaseServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ChannelPool.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/PooledChannelFactory.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Purchase.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/PurchaseItem.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/PurchaseModel.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/PurchaseServlet.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/web/WEB-INF/web.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/TopItemsAtStoreServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TopItemsAtStoreServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/TopStoresForItemServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TopStoresForItemServlet.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -81,19 +74,6 @@
     <property name="settings.editor.selected.configurable" value="configurable.group.appearance" />
   </component>
   <component name="RunManager">
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="Tomcat 9.0.392" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 9.0.392" ALTERNATIVE_JRE_ENABLED="false" nameIsGenerated="true">
       <option name="OPEN_IN_BROWSER_URL" value="http://localhost:8080/A3Servlet/" />
       <option name="UPDATE_ON_FRAME_DEACTIVATION" value="true" />
@@ -193,7 +173,8 @@
       <option name="presentableId" value="Default" />
       <updated>1617261499315</updated>
       <workItem from="1617261500513" duration="3189000" />
-      <workItem from="1617335843215" duration="19924000" />
+      <workItem from="1617335843215" duration="20791000" />
+      <workItem from="1617574309631" duration="13893000" />
     </task>
     <servers />
   </component>

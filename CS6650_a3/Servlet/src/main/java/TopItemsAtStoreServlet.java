@@ -17,7 +17,7 @@ import java.io.IOException;
  */
 @WebServlet(name = "TopItemsAtStoreServlet", value = "/TopItemsAtStoreServlet")
 public class TopItemsAtStoreServlet extends HttpServlet {
-  private static final String TOP_COUNT_ITEMS = "10";
+  private static final Integer TOP_COUNT_ITEMS = 10;
   private Channel channel;
   private final String REQUEST_QUEUE_NAME = "rpc_queue";
   private final BlockingQueue<String> responses = new ArrayBlockingQueue<>(1);
@@ -84,12 +84,11 @@ public class TopItemsAtStoreServlet extends HttpServlet {
           .build();
 
       // build RPC request object, convert to GSON
-      String queryStore = "Store"+ urlParts[1] + TOP_COUNT_ITEMS;
-      String messageForStore = new Gson().toJson(queryStore);
+      String queryStore = "Store" + "," + urlParts[1] + "," + TOP_COUNT_ITEMS.toString();
 
       // enqueue message
       channel.basicPublish("", REQUEST_QUEUE_NAME, props,
-          messageForStore.getBytes("UTF-8"));
+          queryStore.getBytes("UTF-8"));
       // wait for response
       String ctag = channel.basicConsume(replyQueueName, true, (consumerTag, delivery) -> {
         if (delivery.getProperties().getCorrelationId().equals(correlationId)) {

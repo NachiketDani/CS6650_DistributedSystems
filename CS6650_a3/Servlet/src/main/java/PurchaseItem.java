@@ -7,7 +7,7 @@ import java.io.Serializable;
 public class PurchaseItem implements Serializable {
   @SerializedName("ItemID")
   private String itemID;
-  @SerializedName("numberOfItems")
+  @SerializedName("numberOfItems:")
   private int numberOfItems;
 
   /**

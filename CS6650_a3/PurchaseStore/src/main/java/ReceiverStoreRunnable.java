@@ -7,7 +7,7 @@ import com.google.gson.Gson;
 /**
  * Runnable thread that takes individual purchases out of RabbitMQ channel and saves them into Store
  */
-public class Receiver2Runnable implements Runnable {
+public class ReceiverStoreRunnable implements Runnable {
   private static final String EXCHANGE_NAME = "supermarket";
   private static final String EXCHANGE_TYPE = "fanout";
   private Connection connection;
@@ -20,7 +20,7 @@ public class Receiver2Runnable implements Runnable {
    * @param connection
    * @param purchasesQueue
    */
-  public Receiver2Runnable(Connection connection, String purchasesQueue) {
+  public ReceiverStoreRunnable(Connection connection, String purchasesQueue) {
     this.connection = connection;
     this.purchasesQueue = purchasesQueue;
     this.store = Store.getInstance();
@@ -64,19 +64,35 @@ public class Receiver2Runnable implements Runnable {
    * @param purchase : purchase in JSON string format
    */
   private void storePurchase(String purchase) {
+//    System.out.println(purchase);
     PurchaseModel purchaseModel = new Gson().fromJson(purchase, PurchaseModel.class);
-    Purchase purchaseInstance = new Gson().fromJson(purchaseModel.getPurchase(), Purchase.class);
+//    System.out.println("line 69");
+//    System.out.println(purchaseModel);
+
+    String purchaseString = purchaseModel.getPurchase();
+//    System.out.println("line 73");
+//    System.out.println(purchaseString);
+
+    Purchase purchaseInstance = new Gson().fromJson(purchaseString, Purchase.class);
+//    System.out.println("line 77");
+//    System.out.println(purchaseInstance);
+
+
     Integer storeID = purchaseModel.getStoreID();
 
     // Add to hashmap that will help tally popular items within each Store
     for (int i = 0; i < purchaseInstance.getItems().size(); i++) {
       PurchaseItem purchaseItem = purchaseInstance.getItems().get(i);
+//      System.out.println("line74 Receiver StoreRunnable");
+//      System.out.println(purchaseItem);
       this.store.addToCountTopItemsAtStore(storeID, purchaseItem.getItemID(),
           purchaseItem.getNumberOfItems());
-
+//      System.out.println("Line78 ReceiverStoreRunnable");
+//      System.out.println(purchaseItem.getNumberOfItems());
       // Add to hashmap that help tally top stores for each Item
       this.store.addToCountStoresByItem(purchaseItem.getItemID(),
           storeID, purchaseItem.getNumberOfItems());
+
     }
   }
 }

@@ -1,5 +1,6 @@
 import java.util.HashMap;
 import java.util.Map;
+import java.util.PriorityQueue;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
@@ -42,6 +43,7 @@ public class Store {
       newItem.put(itemId, count);
       countTopItemsAtStore.put(storeId, newItem);
     }
+//    System.out.println(countTopItemsAtStore);
   }
 
   public void addToCountStoresByItem(String itemId, Integer storeId, Integer count) {
@@ -57,6 +59,68 @@ public class Store {
       newStoreCounts.put(storeId, count);
       countStoresByItem.put(itemId, newStoreCounts);
     }
+//    System.out.println(countStoresByItem);
   }
+
+  public OutputItemCountsForStore getTopNItemsForStore(int storeId, int n) {
+    PriorityQueue<ItemCountsForStore> sortedItemCountForStores = new PriorityQueue<>();
+    OutputItemCountsForStore result = new OutputItemCountsForStore();
+
+    if (!countTopItemsAtStore.containsKey(storeId)) {
+      System.out.println("StoreId not found");
+      return result;
+    }
+
+    Map<String, Integer> itemsPurchasedAtStore = countTopItemsAtStore.get(storeId);
+    System.out.println(itemsPurchasedAtStore);
+    System.out.println("line 75 Store.java");
+    for (String itemId : itemsPurchasedAtStore.keySet()) {
+      ItemCountsForStore itemCount = new ItemCountsForStore
+          (itemId, itemsPurchasedAtStore.get(itemId));
+      sortedItemCountForStores.add(itemCount);
+
+      // Keep heap size n
+      if (sortedItemCountForStores.size() > n) {
+        sortedItemCountForStores.poll();
+      }
+    }
+
+    // Pop pairs into the result to sort in descending
+    while (!sortedItemCountForStores.isEmpty()) {
+      result.getResult().add(sortedItemCountForStores.poll());
+    }
+    return result;
+  }
+
+  public OutputTopStoresForItem getTopNStoresForItem(String itemId, int n) {
+    PriorityQueue<StoreCountsForItem> sortedStoreCountsForItem = new PriorityQueue<>();
+    OutputTopStoresForItem result = new OutputTopStoresForItem();
+
+    if (!countStoresByItem.containsKey(itemId)) {
+      System.out.println("ItemId not found");
+      return result;
+    }
+
+    Map<Integer, Integer> storeCountsForItem = countStoresByItem.get(itemId);
+    System.out.println(storeCountsForItem);
+    System.out.println("line 106 Store.java");
+    for (Integer storeId : storeCountsForItem.keySet()) {
+      StoreCountsForItem storeSalesCount = new StoreCountsForItem
+          (storeId, storeCountsForItem.get(storeId));
+      sortedStoreCountsForItem.add(storeSalesCount);
+
+      // Keep heap size n
+      if (sortedStoreCountsForItem.size() > n) {
+        sortedStoreCountsForItem.poll();
+      }
+    }
+
+    // Pop pairs into the result to sort in descending
+    while (!sortedStoreCountsForItem.isEmpty()) {
+      result.getResult().add(sortedStoreCountsForItem.poll());
+    }
+    return result;
+  }
+
 
 }

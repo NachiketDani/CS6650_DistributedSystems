@@ -9,7 +9,7 @@ import java.util.Properties;
  * Microservice that caters to storing purchase data into the Store
  */
 public class Receiver2 {
-  private static final int NUM_THREADS = 10;
+  private static final int NUM_THREADS = 100;
   private static final String EXCHANGE_NAME = "supermarket";
   private static final String EXCHANGE_TYPE = "fanout";
 
@@ -31,12 +31,16 @@ public class Receiver2 {
     Store store = Store.getInstance();
 
     for (int i = 0; i < NUM_THREADS; i++) {
-      threads[i] = new Thread(new Receiver2Runnable(connection, purchasesQueue));
+      threads[i] = new Thread(new ReceiverStoreRunnable(connection, purchasesQueue));
       threads[i].start();
+
     }
+    Thread threadGet = new Thread(new ReceiverGetCountsRunnable(connection));
+    threadGet.start();
 
     for (int i = 0; i < NUM_THREADS; i++) {
       threads[i].join();
     }
+    threadGet.join();
   }
 }
