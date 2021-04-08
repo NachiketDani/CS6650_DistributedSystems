@@ -57,17 +57,20 @@ public class ReceiverGetCountsRunnable implements Runnable {
 
           // Query for top item sales for specific Store
           if (messageParts[0].equals("Store")) {
-            System.out.println(messageParts[2]);
+//            System.out.println("ReceiverGetCountsRunnable line60: Before calling function for heap for Store query");
             OutputItemCountsForStore results =
                 store.getTopNItemsForStore(Integer.parseInt(messageParts[1]),
                     Integer.parseInt(messageParts[2]));
+//            System.out.println("Result line64 = "+ results.getResult());
             response = new Gson().toJson(results);
+//            System.out.println("String response line 65:" + response);
 
             // Query for specific item sales per Store
           } else if (messageParts[0].equals("Item")) {
-            System.out.println(messageParts[2]);
+//            System.out.println("ReceiverGetCountsRunnable line68: Before calling function for heap for Item query");
             OutputTopStoresForItem results =
                 store.getTopNStoresForItem(messageParts[1], Integer.parseInt(messageParts[2]));
+//            System.out.println("Result line72 = "+ results.getResult());
             response = new Gson().toJson(results);
 
           } else {
@@ -76,6 +79,7 @@ public class ReceiverGetCountsRunnable implements Runnable {
         } catch (Exception e) {
           e.printStackTrace();
         } finally {
+//          System.out.println("Here is the response, Line79 GetRunnable" + response);
           channel.basicPublish("", delivery.getProperties().getReplyTo(),
               replyProps, response.getBytes("UTF-8"));
           channel.basicAck(delivery.getEnvelope().getDeliveryTag(), false);
@@ -91,6 +95,7 @@ public class ReceiverGetCountsRunnable implements Runnable {
       while (true) {
         synchronized (monitor) {
           try {
+            System.out.println("Waiting at line 95");
             monitor.wait();
           } catch (InterruptedException e) {
             e.printStackTrace();

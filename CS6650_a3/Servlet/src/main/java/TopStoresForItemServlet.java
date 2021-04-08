@@ -22,10 +22,9 @@ public class TopStoresForItemServlet extends HttpServlet {
   private static final String REQUEST_QUEUE_NAME = "rpc_queue";
   private final BlockingQueue<String> responses = new ArrayBlockingQueue<>(1);
   private Channel channel;
-  private static final String HOST = "localhost";
-//      System.getProperty("RABBITMQ_HOST");
-//  private static final String USERNAME = System.getProperty("RABBITMQ_USERNAME");
-//  private static final String PASSWORD = System.getProperty("RABBITMQ_PASSWORD");
+  private static final String HOST = System.getProperty("RABBITMQ_HOST");
+  private static final String USERNAME = System.getProperty("RABBITMQ_USERNAME");
+  private static final String PASSWORD = System.getProperty("RABBITMQ_PASSWORD");
 
 
   /**
@@ -36,8 +35,8 @@ public class TopStoresForItemServlet extends HttpServlet {
   public void init() throws ServletException {
     ConnectionFactory factory = new ConnectionFactory();
     factory.setHost(HOST);
-//    factory.setUsername(USERNAME);
-//    factory.setPassword(PASSWORD);
+    factory.setUsername(USERNAME);
+    factory.setPassword(PASSWORD);
     try {
       Connection connection = factory.newConnection();
       channel = connection.createChannel();

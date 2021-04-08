@@ -72,8 +72,8 @@ public class Store {
     }
 
     Map<String, Integer> itemsPurchasedAtStore = countTopItemsAtStore.get(storeId);
-    System.out.println(itemsPurchasedAtStore);
-    System.out.println("line 75 Store.java");
+//    System.out.println(itemsPurchasedAtStore);
+//    System.out.println("line 75 Store.java, Within the function to get Items in store");
     for (String itemId : itemsPurchasedAtStore.keySet()) {
       ItemCountsForStore itemCount = new ItemCountsForStore
           (itemId, itemsPurchasedAtStore.get(itemId));
@@ -89,6 +89,7 @@ public class Store {
     while (!sortedItemCountForStores.isEmpty()) {
       result.getResult().add(sortedItemCountForStores.poll());
     }
+//    System.out.println("Line 123: Store- Result for get Stores for Item query" + result);
     return result;
   }
 
@@ -99,11 +100,12 @@ public class Store {
     if (!countStoresByItem.containsKey(itemId)) {
       System.out.println("ItemId not found");
       return result;
+
     }
 
     Map<Integer, Integer> storeCountsForItem = countStoresByItem.get(itemId);
-    System.out.println(storeCountsForItem);
-    System.out.println("line 106 Store.java");
+//    System.out.println(storeCountsForItem);
+//    System.out.println("line 106 Store.java, in function to get N stores for item");
     for (Integer storeId : storeCountsForItem.keySet()) {
       StoreCountsForItem storeSalesCount = new StoreCountsForItem
           (storeId, storeCountsForItem.get(storeId));
@@ -119,6 +121,7 @@ public class Store {
     while (!sortedStoreCountsForItem.isEmpty()) {
       result.getResult().add(sortedStoreCountsForItem.poll());
     }
+//    System.out.println("Line 123: Store- Result for get Stores for Item query" + result);
     return result;
   }
 

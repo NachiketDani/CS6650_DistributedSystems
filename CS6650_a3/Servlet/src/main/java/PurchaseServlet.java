@@ -26,19 +26,6 @@ public class PurchaseServlet extends HttpServlet {
   private static final String EXCHANGE_NAME = "supermarket";
   private Channel channel;
 
-  /**
-   * Init method for Servlet
-   * @throws ServletException Exception if channel cannot be instantiated
-   */
-  @Override
-  public void init() throws ServletException {
-    try {
-      channel = ChannelPool.getChannelPoolInstance().borrowObject();
-    } catch (Exception exception) {
-      exception.printStackTrace();
-      System.err.println("Unable to retrieve a channel!!");
-    }
-  }
 
   /**
    * Post Purchase Servlet method
@@ -64,7 +51,7 @@ public class PurchaseServlet extends HttpServlet {
     String[] urlParts = urlPath.split("/");
     if (!isUrlValid(urlParts)) {
       response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-      response.getWriter().write("Invalid parameters");
+      response.getWriter().write("Invalid URL parameters");
       return;
     }
 
@@ -77,11 +64,14 @@ public class PurchaseServlet extends HttpServlet {
         response.getWriter().write("Invalid purchaseItems");
       } else {
         // request body is properly formatted, insert into the DB
+        channel = ChannelPool.getChannelPoolInstance().borrowObject();
         makePurchase(urlParts, requestBody);
+        ChannelPool.getChannelPoolInstance().returnObject(channel);
+        response.setStatus((HttpServletResponse.SC_CREATED));
       }
     } catch (Exception e) {
       response.setStatus((HttpServletResponse.SC_BAD_REQUEST));
-      response.getWriter().write("Invalid purchase");
+      response.getWriter().write("Bad purchase request");
     }
   }
 
@@ -204,13 +194,5 @@ public class PurchaseServlet extends HttpServlet {
     return verifyDate(urlParts[DATE_VAL_INDEX])
         && verifyCustomerId(urlParts[CUSTOMERID_INDEX])
         && verifyStoreId(urlParts[STOREID_INDEX]);
-  }
-
-  /**
-   * Destroy method for active channel to return channel to pool
-   */
-  @Override
-  public void destroy() {
-    ChannelPool.getChannelPoolInstance().returnObject(channel);
   }
 }

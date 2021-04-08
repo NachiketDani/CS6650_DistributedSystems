@@ -5,9 +5,7 @@ import java.io.FileInputStream;
 import java.util.Properties;
 
 public class Receiver {
-  private static final int NUM_THREADS = 10;
-  private static final String EXCHANGE_NAME = "supermarket";
-  private static final String EXCHANGE_TYPE = "fanout";
+  private static final int NUM_THREADS = 75;
 
   public static void main(String[] argv) throws Exception {
     // set config properties
@@ -18,6 +16,8 @@ public class Receiver {
 
     ConnectionFactory factory = new ConnectionFactory();
     factory.setHost(System.getProperty("RABBITMQ_HOST"));
+    factory.setUsername(System.getProperty("RABBITMQ_USERNAME"));
+    factory.setPassword(System.getProperty("RABBITMQ_PASSWORD"));
     Connection connection = factory.newConnection();
     Channel channel = connection.createChannel();
     String purchasesQueue = channel.queueDeclare().getQueue();

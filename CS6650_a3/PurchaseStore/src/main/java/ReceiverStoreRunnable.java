@@ -44,11 +44,11 @@ public class ReceiverStoreRunnable implements Runnable {
       channel.queueBind(this.purchasesQueue, EXCHANGE_NAME, "");
       // max one message per receiver
       channel.basicQos(1);
-      System.out.println(" [*] Waiting for purchase data for Store. To exit press CTRL+C");
+//      System.out.println(" [*] Waiting for purchase data for Store. To exit press CTRL+C");
 
       DeliverCallback deliverCallback = (consumerTag, delivery) -> {
         String purchase = new String(delivery.getBody(), "UTF-8");
-        System.out.println(" [x] Received '" + purchase + "'");
+//        System.out.println(" [x] Received '" + purchase + "'");
         storePurchase(purchase);
         channel.basicAck(delivery.getEnvelope().getDeliveryTag(), false);
       };

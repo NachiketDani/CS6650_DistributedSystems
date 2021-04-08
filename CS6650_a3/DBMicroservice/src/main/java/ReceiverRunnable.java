@@ -9,6 +9,7 @@ import java.io.IOException;
 public class ReceiverRunnable implements Runnable{
   private static final String EXCHANGE_NAME = "supermarket";
   private static final String EXCHANGE_TYPE = "fanout";
+  private static final boolean DURABLE = false;
   private Connection connection;
   private String purchasesQueue;
   private PurchaseDao purchaseDao;
@@ -32,8 +33,8 @@ public class ReceiverRunnable implements Runnable{
   @Override
   public void run() {
     try {
-      Channel channel = connection.createChannel();
-      channel.exchangeDeclare(EXCHANGE_NAME, EXCHANGE_TYPE);
+      final Channel channel = connection.createChannel();
+      channel.exchangeDeclare(EXCHANGE_NAME, EXCHANGE_TYPE, DURABLE);
       channel.queueBind(this.purchasesQueue, EXCHANGE_NAME, "");
       // max one message per receiver
       channel.basicQos(1);
@@ -41,7 +42,7 @@ public class ReceiverRunnable implements Runnable{
 
       DeliverCallback deliverCallback = (consumerTag, delivery) -> {
         String purchase = new String(delivery.getBody(), "UTF-8");
-        System.out.println(" [x] Received '" + purchase + "'");
+//        System.out.println(" [x] Received '" + purchase + "'");
         makePurchase(purchase);
         channel.basicAck(delivery.getEnvelope().getDeliveryTag(), false);
       };
@@ -53,7 +54,7 @@ public class ReceiverRunnable implements Runnable{
 
   private void makePurchase(String purchase) {
     PurchaseModel newPurchase = new Gson().fromJson(purchase, PurchaseModel.class);
-    System.out.println("ReceiverRunnable line 57: attempt to db write");
+//    System.out.println("ReceiverRunnable line 57: attempt to db write");
     purchaseDao.createPurchase(newPurchase);
   }
 }

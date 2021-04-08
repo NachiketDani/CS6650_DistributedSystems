@@ -12,6 +12,7 @@ public class Receiver2 {
   private static final int NUM_THREADS = 100;
   private static final String EXCHANGE_NAME = "supermarket";
   private static final String EXCHANGE_TYPE = "fanout";
+  private static final boolean DURABLE = false;
 
   public static void main(String[] argv) throws Exception {
     // set config properties
@@ -22,9 +23,11 @@ public class Receiver2 {
 
     ConnectionFactory factory = new ConnectionFactory();
     factory.setHost(System.getProperty("RABBITMQ_HOST"));
+    factory.setUsername(System.getProperty("RABBITMQ_USERNAME"));
+    factory.setPassword(System.getProperty("RABBITMQ_PASSWORD"));
     Connection connection = factory.newConnection();
     Channel channel = connection.createChannel();
-    String purchasesQueue = channel.queueDeclare().getQueue();
+    String purchasesQueue = channel.queueDeclare("purchasesQueue", DURABLE, false, false, null).getQueue();
 
     Thread[] threads = new Thread[NUM_THREADS];
 

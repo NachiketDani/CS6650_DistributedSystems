@@ -20,14 +20,14 @@ public class OutputItemCountsForStore implements Serializable {
    * @return
    */
   public List<ItemCountsForStore> getResult() {
-    return result;
+    return this.result;
   }
 
   /**
    * Setter method for the store attribute
    * @param result store list of ItemCountsForStore
    */
-  public void setStore(List<ItemCountsForStore> result) {
+  public void setResult(List<ItemCountsForStore> result) {
     this.result = result;
   }
 }
