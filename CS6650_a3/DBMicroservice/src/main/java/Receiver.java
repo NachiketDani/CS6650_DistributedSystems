@@ -6,6 +6,7 @@ import java.util.Properties;
 
 public class Receiver {
   private static final int NUM_THREADS = 75;
+  private static final boolean DURABLE = false;
 
   public static void main(String[] argv) throws Exception {
     // set config properties
@@ -20,7 +21,7 @@ public class Receiver {
     factory.setPassword(System.getProperty("RABBITMQ_PASSWORD"));
     Connection connection = factory.newConnection();
     Channel channel = connection.createChannel();
-    String purchasesQueue = channel.queueDeclare().getQueue();
+    String purchasesQueue = channel.queueDeclare("dbQueue", DURABLE, false, false, null).getQueue();
 
     Thread[] threads = new Thread[NUM_THREADS];
 

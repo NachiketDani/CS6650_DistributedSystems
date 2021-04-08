@@ -52,7 +52,7 @@ public class ReceiverStoreRunnable implements Runnable {
         storePurchase(purchase);
         channel.basicAck(delivery.getEnvelope().getDeliveryTag(), false);
       };
-      channel.basicConsume(purchasesQueue, true, deliverCallback, consumerTag -> { });
+      channel.basicConsume(purchasesQueue, false, deliverCallback, consumerTag -> { });
 
     } catch (IOException e) {
       e.printStackTrace();

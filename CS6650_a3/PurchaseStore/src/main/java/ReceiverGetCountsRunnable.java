@@ -95,7 +95,7 @@ public class ReceiverGetCountsRunnable implements Runnable {
       while (true) {
         synchronized (monitor) {
           try {
-            System.out.println("Waiting at line 95");
+//            System.out.println("Waiting at line 95");
             monitor.wait();
           } catch (InterruptedException e) {
             e.printStackTrace();

@@ -63,24 +63,28 @@ public class PurchaseManager {
 
     // Central Phase Stores
     Thread[] centralThreads = new Thread[numStores/4];
-    for (int i = 0; i < numStores/4; i++) {
-      centralThreads[i] = new Thread(new StoreThreadRunnable(i+1, serverAddress, date,
+    int j = 0;
+    for (int i = numStores/4; i < numStores/2; i++) {
+      centralThreads[j] = new Thread(new StoreThreadRunnable(i+1, serverAddress, date,
           customersPerStore, maxItemId, numPurchases,
           itemsPerPurchase, phase2Latch, phase3Latch, latencyConsumer,
           fileWriterConsumer));
-      centralThreads[i].start();
+      centralThreads[j].start();
+      j++;
     }
 
     phase3Latch.await();
 
     // West Phase Stores
     Thread[] westThreads = new Thread[numStores / 2];
-    for (int i = 0; i < numStores/2; i++) {
-      westThreads[i] = new Thread(new StoreThreadRunnable(i+1, serverAddress, date,
+    int k = 0;
+    for (int i = numStores/2; i < numStores; i++) {
+      westThreads[k] = new Thread(new StoreThreadRunnable(i+1, serverAddress, date,
           customersPerStore, maxItemId, numPurchases,
           itemsPerPurchase, phase2Latch, phase3Latch, latencyConsumer,
           fileWriterConsumer));
-      westThreads[i].start();
+      westThreads[k].start();
+      k++;
     }
 
     // Join all threads
